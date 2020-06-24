@@ -1,4 +1,5 @@
 {% load static %}
+<!-- staticタグを利用できるように記載 -->
 
 <html lang="ja">
 
@@ -10,24 +11,22 @@
     <meta name="author" content="">
 
     <title>{% block title %}{% endblock %}</title>
+    <!-- タイトルを埋め込み -->
 
      <!-- Bootstrap Core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- staticファイルのパスを相対パスで記述 -->
 
-      <!-- Custom Fonts -->
+    <!-- Custom Fonts -->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="{% static 'vendor/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="{% static 'css/stylish-portfolio.min.css' %}" rel="stylesheet">
-
     {% block head %}{% endblock %}
-  
 </head>
 
 <body id="page-top">
-
       <!-- Navigation -->
     <a class="menu-toggle rounded" href="#">
         <i class="fas fa-bars"></i>
@@ -36,25 +35,27 @@
         <ul class="sidebar-nav">
         <li class="sidebar-brand">
             <a class="js-scroll-trigger" href="{% url 'main_app:index' %}">My Portfolio</a>
+            <!-- URLタグ view->urls main_appアプリのurlsでindexを参照する -->
         </li>
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="{% url 'main_app:index' %}#page-top">Home</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#about">About</a>
+            <a class="js-scroll-trigger" href="{% url 'account_signup' %}">Sign up</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#services">Services</a>
+            <a class="js-scroll-trigger" href="{% url 'account_login' %}">Log in</a>
         </li>
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="#page-top">検討中</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'main_app:inquiry' %}">お問い合わせ</a>
+            <a class="js-scroll-trigger" href="{% url 'main_app:inquiry' %}">Inquiry</a>
         </li>
         </ul>
     </nav>
     
+    <!-- messages（変数）があったらリストをループさせ表示させる -->
     {% if messages %}
     <div class="container">
         <div class="row">
@@ -71,7 +72,7 @@
     </div>
     {% endif %}
 
-    {% block header %}{% endblock %}
+    {% block top %}{% endblock %}
     {% block about %}{% endblock %}
     {% block services %}{% endblock %}
     {% block call2ation %}{% endblock %}

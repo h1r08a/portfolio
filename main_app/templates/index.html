@@ -1,21 +1,23 @@
 {% extends 'base.html' %}
+<!-- base.htmlにblockタグを埋め込むためのextends -->
+
 {% load static %}
 
 {% block title %}MyPortfolio{% endblock %}
 
-{% block header %}
-<!-- Header -->
-<header class="masthead d-flex">
+{% block top %}
+<!-- top -->
+<section class="masthead d-flex">
     <div class="container text-center my-auto">
         <h1 class="mb-1">My Portfolio</h1>
         <h3 class="mb-5">
             <em>日記管理サービスを作成しました！</em>
         </h3>
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">この作品について</a>
-        <a class="btn btn-primary btn-xl" href="#">日記サイトへGO</a>
+        <a class="btn btn-primary btn-xl" href="{% url 'account_login' %}">日記サイトへGO</a>
     </div>
     <div class="overlay"></div>
-</header>
+</section>
 {% endblock %}
 
 {% block about %}

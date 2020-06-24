@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# 各アプリのurls.pyの場所を記述する
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_app.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
