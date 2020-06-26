@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, ListView
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Diary
 from .forms import InquiryForm
 # カレントディレクトリのforms.からimport
 
@@ -26,6 +28,23 @@ class InquiryView(FormView):
         form.send_email()
         # メール送信メソッド実行
         messages.success(self.request, 'メッセージを送信しました。')
-        # messagesメソッド　success
+        # messagesメソッド　送信完了したことを通知
         return super().form_valid(form)
         # オーバーライドしたform_validを実行？　親クラスを実行する
+
+class PostListView(ListView, LoginRequiredMixin):  #ログイン状態でないとアクセスできなくする
+    template_name = "post_list.html"
+    model = Diary
+    # データを持ってくるDBを記述
+    context_object_name = 'diaries'
+
+    def get_queryset(self):
+        tmp = Diary.objects.filter(user=self.request.user)
+        diaries = tmp.order_by('-created_at')
+        return diaries
+    # ログインユーザーの投稿を持ってくる
+    # filter 検索条件を指定
+    # 作成順に並べ替え
+
+class Post(TemplateView):
+    template_name = "post.html"

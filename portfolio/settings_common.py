@@ -124,9 +124,12 @@ MESSAGE_TAGS = {
     messages.INFO: 'alert alert-info',
 }
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 # django-allauthで利用するdjango.contrib.sitesを使うためにサイト識別用IDを設定
 SITE_ID = 1
 
+# ログイン方法　ユーザー認証
 AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 # 一般ユーザー用(メールアドレス認証)
@@ -134,19 +137,19 @@ AUTHENTICATION_BACKENDS = (
 # 管理サイト用(ユーザー名認証)
 )
 
-# メールアドレス認証に変更する設定
+# メールアドレス認証に変更し、ユーザー名は使用しない
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
 
-# サインアップにメールアドレス確認を挟むよう設定
+# サインアップにメールアドレス確認必須設定
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 
 # ログイン/ログアウト後の遷移先を設定
-LOGIN_REDIRECT_URL = 'main_app:main_app_list'
+LOGIN_REDIRECT_URL = 'main_app:post_list'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
 # ログアウトリンクのクリック一発でログアウトする設定
 ACCOUNT_LOGOUT_ON_GET = True
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+MEDIA_URL = os.path.join(BASE_DIR, 'media/')

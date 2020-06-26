@@ -10,20 +10,20 @@
                     {% csrf_token %}
                     {{ form.as_p }}
                     {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                     {% endif %}
                     <button class="btn btn-primary" type="submit">ログイン</button>
                     <p><a class="button secondaryAction" href="{% url 'account_reset_password' %}">パスワードを忘れましたか？</a></p>
                 </form><br><br>
-                <h3>ログインするには下記のアカウントをご使用ください。</h3>
+                <h3>下記のアカウントでログインしてください。</h3>
                 <table border="1" width="50%">
                     <tr>
                         <th>メールアドレス</th>
                         <th>パスワード</th>
                     </tr>
                     <tr>
-                        <td>admin@a.com</td>
-                        <td>admin1234</td>
+                        <td>admin@admin.com</td>
+                        <td>admin</td>
                     </tr>
                 </table>
             </div>

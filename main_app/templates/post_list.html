@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block titile %}Post list{% endblock %}
+
+{% block contents %}
+<section class="content-section">
+    {% for diary in diaries %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-preview">
+                    <a href="{% url 'main_app:post' %}">
+                        <h2 class="post-title">
+                            {{ diary.title }}
+                        </h2>
+                        <h3 class="post-subtitle">
+                            {{ diary.content }}
+                        </h3>
+                    </a>
+                    <p class="post-meta">{{ diary.created_at }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    <!-- Pager -->
+    <div>
+        <div class="clearfix">
+            <a class="btn btn-primary" href="#">Newer Posts &rarr;</a>
+        </div>
+        <div class="clearfix">
+            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

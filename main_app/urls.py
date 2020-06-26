@@ -9,4 +9,6 @@ urlpatterns = [
     # viewsのIndexViewに処理を渡す 逆引きの際にnameを利用する as_viewsとすることでクラスベースのビューを関数化する
 
     path('inquiry/', views.InquiryView.as_view(), name="inquiry"),
+    path('post_list/', views.PostListView.as_view(), name="post_list"),
+    path('post/', views.Post.as_view(), name="post"),
 ]

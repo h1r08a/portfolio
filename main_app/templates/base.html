@@ -47,7 +47,7 @@
             <a class="js-scroll-trigger" href="{% url 'account_login' %}">Log in</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="#page-top">検討中</a>
+            <a class="js-scroll-trigger" href="{% url 'account_logout' %}">Log out</a>
         </li>
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="{% url 'main_app:inquiry' %}">Inquiry</a>
@@ -80,6 +80,7 @@
     {% block totop %}{% endblock %}
     {% block contents %}{% endblock %}
 
+    <hr>
     <footer class="footer text-center">
         <div class="container">
             <ul class="list-inline mb-5">
