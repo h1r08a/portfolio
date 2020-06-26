@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Diary list{% endblock %}
+
+{% block contents %}
+<section class="content-section">
+    <a class="btn btn-primary" href="{% url 'main_app:diary_create' %}">新規作成</a>
+    {% for diary in diary_list %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-preview">
+                    <!-- urlにモデルのid(pk)を送っている　逆引き　diary.pk:モデルからidを引っ張ってきているだけ -->
+                    <a href="{% url 'main_app:diary_detail' diary.pk %}">
+                        <h2 class="post-title">
+                            {{ diary.title }}
+                        </h2>
+                        <h4 class="post-subtitle">
+                            {{ diary.content|truncatechars:30 }}
+                        </h4>
+                    </a>
+                    <p class="post-meta">{{ diary.created_at }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% empty %}
+        <p>日記が存在しません。</p>
+    {% endfor %}
+
+    {% if is_paginated %}
+        {% include 'pagination.html' %}
+    {% endif %}
+</section>
+{% endblock %}

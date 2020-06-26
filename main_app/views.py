@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, FormView, ListView
+from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Diary
-from .forms import InquiryForm
+from .forms import InquiryForm, DiaryCreateForm
 # カレントディレクトリのforms.からimport
 
 import logging
@@ -32,11 +32,10 @@ class InquiryView(FormView):
         return super().form_valid(form)
         # オーバーライドしたform_validを実行？　親クラスを実行する
 
-class PostListView(ListView, LoginRequiredMixin):  #ログイン状態でないとアクセスできなくする
-    template_name = "post_list.html"
+class DiaryListView(ListView, LoginRequiredMixin):  #ログイン状態でないとアクセスできなくする
+    template_name = "diary_list.html"
     model = Diary
-    # データを持ってくるDBを記述
-    context_object_name = 'diaries'
+    paginate_by = 3
 
     def get_queryset(self):
         tmp = Diary.objects.filter(user=self.request.user)
@@ -46,5 +45,30 @@ class PostListView(ListView, LoginRequiredMixin):  #ログイン状態でない�
     # filter 検索条件を指定
     # 作成順に並べ替え
 
-class Post(TemplateView):
-    template_name = "post.html"
+class DiaryDetailView(DetailView, LoginRequiredMixin):
+    template_name = "diary_detail.html"
+    model = Diary
+
+class DiaryCreateView(CreateView, LoginRequiredMixin):
+    template_name = "diary_create.html"
+    model = Diary
+    form_class = DiaryCreateForm
+    # 自作のFormを(読み込み)オーバーライド
+    success_url = reverse_lazy('main_app:diary_list')
+    # 処理が完了した際の遷移先を指定
+
+    # formのバリデーションに問題がないとき実行される
+    def form_valid(self, form):
+        diary = form.save(commit=False)
+        # DBにフォーム内容を保存する前にモデルオブジェクト(Diary)を取得して、値を代入する
+        diary.user = self.request.user
+        # ログインuserを自動で取得する
+        diary.save()
+        # 最後にDBへ保存
+        messages.success(self.request, "日記を作成しました")
+        return super().form_valid(form)
+
+    # バリデーション失敗時に実行される
+    def form_invalid(self, form):
+        messages.error(self.request, "日記の作成に失敗しました")
+        return super().form_invalid(form)

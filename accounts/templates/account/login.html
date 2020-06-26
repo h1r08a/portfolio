@@ -3,8 +3,8 @@
 {% block contents %}
 <section class="content-section">
     <div class="container">
+        <h1>Log In</h1>
         <div class="row">
-            <h1>Log In</h1>
             <div class="my-div-style">
                 <form method="post" action="{% url 'account_login' %}">
                     {% csrf_token %}

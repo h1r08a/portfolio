@@ -1,5 +1,6 @@
-from django.forms import Form, CharField, EmailField, Textarea
+from django.forms import Form, CharField, EmailField, Textarea, ModelForm
 from django.core.mail import EmailMessage
+from .models import Diary
 
 # お問い合わせ用フォーム作成　4つのフィールドを定義
 class InquiryForm(Form):
@@ -44,3 +45,9 @@ class InquiryForm(Form):
         message = EmailMessage(subject=subject, body=message, from_email=from_email, to=to_list, cc=cc_list)
         message.send()
         # sendメソッドで送信
+
+# Modelを継承してFormが作れる
+class DiaryCreateForm(ModelForm):
+    class Meta:
+        model = Diary
+        fields = ('title', 'content', 'photo1', 'photo2', 'photo3')

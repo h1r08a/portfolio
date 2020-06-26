@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Diary detail{% endblock %}
+
+<!-- viewsが操作しているオブジェクトobject -->
+{% block contents %}
+<section class="content-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h2 class="post-title">{{ object.title }}</h2>
+                    <span class="meta">Created at {{ object.created_at }}</span>
+                    <br>
+                    <span class="meta">Updated at {{ object.updated_at }}</span>
+                </div>
+                <hr>
+                <div>
+                    {{ object.content | urlize | linebreaksbr }}
+                </div>
+                {% if object.photo1 %}
+                <hr>
+                <!-- pathしかDBに保存されていないからurlをつける -->
+                <img src="{{ object.photo1.url }}" width="100%" height="auto" alt="{{ object.photo1 }}"> 
+                {% endif %}
+                {% if object.photo2 %}
+                <hr>
+                <!-- pathしかDBに保存されていないからurlをつける -->
+                <img src="{{ object.photo2.url }}" width="100%" height="auto" alt="{{ object.photo2 }}"> 
+                {% endif %}
+                {% if object.photo3 %}
+                <hr>
+                <!-- pathしかDBに保存されていないからurlをつける -->
+                <img src="{{ object.photo3.url }}" alt="{{ object.photo3 }}"> 
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
