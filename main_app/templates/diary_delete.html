@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Diary delete{% endblock %}
+
+{% block contents %}
+<section class="content-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <form method="POST"> 
+                    {% csrf_token %}
+                    <p>本当に削除しますか？</p>
+                    <button class="btn btn-primary" type="submit">削除</button>
+                    <a class="btn btn-secondary" href="{% url 'main_app:diary_detail' object.pk %}">キャンセル</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

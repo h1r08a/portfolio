@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Diary create{% endblock %}
+{% block title %}Diary update{% endblock %}
 
 {% block contents %}
 <section class="content-section">
@@ -12,7 +12,8 @@
                     <table class="table">
                         {{ form.as_table }}
                     </table>
-                    <button class="btn btn-primary" type="submit">作成</button>
+                    <button class="btn btn-primary" type="submit">更新</button>
+                    <a class="btn btn-secondary" href="{% url 'main_app:diary_detail' object.pk %}">キャンセル</a>
                 </form>
             </div>
         </div>

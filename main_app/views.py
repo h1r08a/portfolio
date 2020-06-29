@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView
+from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -72,3 +72,31 @@ class DiaryCreateView(CreateView, LoginRequiredMixin):
     def form_invalid(self, form):
         messages.error(self.request, "日記の作成に失敗しました")
         return super().form_invalid(form)
+
+
+class DiaryUpdateView(UpdateView, LoginRequiredMixin):
+    template_name = "diary_update.html"
+    model = Diary
+    form_class = DiaryCreateForm
+
+    # 処理完了後の遷移先　動的に変化するurlを記述　キーを渡す
+    def get_success_url(self):
+        return reverse_lazy('main_app:diary_detail', kwargs={'pk': self.kwargs['pk']})
+
+    def form_valid(self, form):
+        messages.success(self.request, "日記を更新しました")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "日記の更新に失敗しました")
+        return super().form_invalid(form)
+
+class DiaryDeleteView(DeleteView, LoginRequiredMixin):
+    template_name = 'diary_delete.html'
+    model = Diary
+    success_url = reverse_lazy('main_app:diary_list')
+
+    # 削除成功時に実行されるメソッドにmessagesをオーバーライド
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, "日記が削除されました")
+        return super().delete(request, *args, **kwargs)

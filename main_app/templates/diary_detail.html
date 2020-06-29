@@ -32,6 +32,9 @@
                 <!-- pathしかDBに保存されていないからurlをつける -->
                 <img src="{{ object.photo3.url }}" alt="{{ object.photo3 }}"> 
                 {% endif %}
+                <hr>
+                <a class="btn btn-primary" href="{% url 'main_app:diary_update' object.pk %}">編集</a>
+                <a class="btn btn-secondary" href="{% url 'main_app:diary_delete' object.pk %}">削除</a>
             </div>
         </div>
     </div>
