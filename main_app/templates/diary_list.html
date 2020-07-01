@@ -3,8 +3,10 @@
 
 {% block contents %}
 <section class="content-section">
-    <a class="btn btn-primary" href="{% url 'main_app:diary_create' %}">新規作成</a>
-    {% for diary in diary_list %}
+    <div class="container"><h1>Diary List</h1>
+        <a class="btn btn-primary" href="{% url 'main_app:diary_create' %}">新規作成</a>
+    </div>
+{% for diary in diary_list %}
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">

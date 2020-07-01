@@ -40,18 +40,21 @@
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="{% url 'main_app:index' %}#page-top">Home</a>
         </li>
-        <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'account_signup' %}">Sign up</a>
-        </li>
-        <li class="sidebar-nav-item">
-            <a class="js-scroll-trigger" href="{% url 'account_login' %}">Log in</a>
-        </li>
+        {% if user.is_authenticated %}
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="{% url 'main_app:diary_list' %}">Diary list</a>
         </li>
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="{% url 'account_logout' %}">Log out</a>
         </li>
+        {% else %}
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'account_signup' %}">Sign up</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'account_login' %}">Log in</a>
+        </li>
+        {% endif %}
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" href="{% url 'main_app:inquiry' %}">Inquiry</a>
         </li>
@@ -75,12 +78,6 @@
     </div>
     {% endif %}
 
-    {% block top %}{% endblock %}
-    {% block about %}{% endblock %}
-    {% block services %}{% endblock %}
-    {% block call2ation %}{% endblock %}
-    {% block tech %}{% endblock %}
-    {% block totop %}{% endblock %}
     {% block contents %}{% endblock %}
 
     <hr>
@@ -88,17 +85,17 @@
         <div class="container">
             <ul class="list-inline mb-5">
                 <li class="list-inline-item">
-                    <a class="social-link rounded-circle text-white mr-3" href="#!">
+                    <a class="social-link rounded-circle text-white mr-3" href="https://www.facebook.com/">
                         <i class="icon-social-facebook"></i>
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a class="social-link rounded-circle text-white mr-3" href="#!">
+                    <a class="social-link rounded-circle text-white mr-3" href="https://twitter.com/">
                         <i class="icon-social-twitter"></i>
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a class="social-link rounded-circle text-white" href="#!">
+                    <a class="social-link rounded-circle text-white" href="https://github.com/">
                         <i class="icon-social-github"></i>
                     </a>
                 </li>

@@ -2,10 +2,11 @@
 <!-- base.htmlにblockタグを埋め込むためのextends -->
 
 {% load static %}
+<!-- staticファイルの場所を記述 -->
 
 {% block title %}MyPortfolio{% endblock %}
 
-{% block top %}
+{% block contents %}
 <!-- top -->
 <section class="masthead d-flex">
     <div class="container text-center my-auto">
@@ -18,9 +19,7 @@
     </div>
     <div class="overlay"></div>
 </section>
-{% endblock %}
 
-{% block about %}
 <!-- About -->
 <section class="content-section bg-light" id="about">
     <div class="container text-center">
@@ -30,137 +29,130 @@
                 <h3>Web上で記事の作成・編集・削除ができる日記管理サービスを作成しました</h3>
                 <p class="lead mb-5">フロントエンドのHTML/CSS/JSのベースは
                     <a href="https://startbootstrap.com/">Start Bootstrap</a>を使用しています</p>
-                <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Offer</a>
+                <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">機能一覧</a>
             </div>
         </div>
     </div>
 </section>
-{% endblock %}
 
-{% block services %}
 <!-- Services -->
 <section class="content-section bg-primary text-white text-center" id="services">
     <div class="container">
         <div class="content-section-heading">
             <h3 class="text-secondary mb-0">Services</h3>
-            <h2 class="mb-5">使用した技術・サービス</h2>
+            <h2 class="mb-5">機能一覧</h2>
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                 <span class="service-icon rounded-circle mx-auto mb-3">
-                    <i class="icon-screen-smartphone"></i>
+                    <i class="icon-star"></i>
                 </span>
                 <h4>
-                    <strong>Responsive</strong>
+                    <strong>日記機能</strong>
                 </h4>
-                <p class="text-faded mb-0">Looks great on any screen size!</p>
+                <p class="text-faded mb-0">投稿 / 編集 / 削除<br>詳細表示<br>一覧表示(ページネーション)</p>
             </div>
             <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                 <span class="service-icon rounded-circle mx-auto mb-3">
-                    <i class="icon-pencil"></i>
+                    <i class="icon-diamond"></i>
                 </span>
                 <h4>
-                    <strong>Redesigned</strong>
+                    <strong>会員機能</strong>
                 </h4>
-                <p class="text-faded mb-0">Freshly redesigned for Bootstrap 4.</p>
+                <p class="text-faded mb-0">管理ユーザーの<br>サインアップ / ログイン</p>
             </div>
             <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
                 <span class="service-icon rounded-circle mx-auto mb-3">
-                    <i class="icon-like"></i>
+                    <i class="icon-ghost"></i>
                 </span>
                 <h4>
-                    <strong>Favorited</strong>
+                    <strong>画像ファイル</strong>
                 </h4>
-                <p class="text-faded mb-0">Millions of users
-                    <i class="fas fa-heart"></i>
-                    Start Bootstrap!</p>
+                <p class="text-faded mb-0">アップロード機能</p>
             </div>
             <div class="col-lg-3 col-md-6">
                 <span class="service-icon rounded-circle mx-auto mb-3">
                     <i class="icon-mustache"></i>
                 </span>
                 <h4>
-                    <strong>Question</strong>
+                    <strong>問合せ機能</strong>
                 </h4>
-                <p class="text-faded mb-0">I mustache you a question...</p>
+                <p class="text-faded mb-0">問合せ機能</p>
             </div>
         </div>
     </div>
 </section>
-{% endblock %}
 
-{% block call2ation %}
 <!-- Call to Action -->
 <section class="content-section bg-primary text-white">
     <div class="container text-center">
-        <h2 class="mb-4">The buttons below are impossible to resist...</h2>
-        <a href="#!" class="btn btn-xl btn-light mr-4">Click Me!</a>
-        <a href="#!" class="btn btn-xl btn-dark">Look at Me!</a>
+        <h2 class="mb-4">以下のボタンをクリックして使用技術を確認してください</h2>
+        <a href="#technology" class="btn btn-xl btn-dark js-scroll-trigger">技術 / サービス</a>
     </div>
 </section>
-{% endblock %}
 
-{% block tech %}
 <!-- Portfolio -->
-<section class="content-section" id="portfolio">
+<section class="content-section" id="technology">
     <div class="container">
         <div class="content-section-heading text-center">
-            <h3 class="text-secondary mb-0">Portfolio</h3>
-            <h2 class="mb-5">Recent Projects</h2>
+            <h3 class="text-secondary mb-0">Technology</h3>
+            <h2 class="mb-5">技術 / サービス</h2>
         </div>
         <div class="row no-gutters">
             <div class="col-lg-6">
-                <a class="portfolio-item" href="#!">
+                <a class="portfolio-item" href="https://www.python.jp/index.html">
                     <div class="caption">
                         <div class="caption-content">
-                            <div class="h2">Stationary</div>
+                            <div class="h2">Python</div>
                             <p class="mb-0">A yellow pencil with envelopes on a clean, blue backdrop!</p>
                         </div>
                     </div>
-                    <img class="img-fluid" src="{% static 'img/portfolio-1.jpg' %}" alt="">
+                    <img class="img-fluid" src="{% static 'img/1.jpg' %}" alt="">
                 </a>
             </div>
             <div class="col-lg-6">
-                <a class="portfolio-item" href="#!">
+                <a class="portfolio-item" href="https://www.postgresql.jp/">
                     <div class="caption">
                         <div class="caption-content">
-                            <div class="h2">Ice Cream</div>
+                            <div class="h2">PostgreSQL</div>
                             <p class="mb-0">A dark blue background with a colored pencil, a clip, and a tiny ice cream
                                 cone!</p>
                         </div>
                     </div>
-                    <img class="img-fluid" src="{% static 'img/portfolio-2.jpg' %}" alt="">
+                    <img class="img-fluid" src="{% static 'img/2.jpg' %}" alt="">
                 </a>
             </div>
             <div class="col-lg-6">
-                <a class="portfolio-item" href="#!">
+                <a class="portfolio-item" href="https://aws.amazon.com/jp/">
                     <div class="caption">
                         <div class="caption-content">
-                            <div class="h2">Strawberries</div>
+                            <div class="h2">AWS</div>
                             <p class="mb-0">Strawberries are such a tasty snack, especially with a little sugar on top!
                             </p>
                         </div>
                     </div>
-                    <img class="img-fluid" src="{% static 'img/portfolio-3.jpg' %}" alt="">
+                    <img class="img-fluid" src="{% static 'img/3.jpg' %}" alt="">
                 </a>
             </div>
             <div class="col-lg-6">
-                <a class="portfolio-item" href="#!">
+                <a class="portfolio-item" href="https://www.docker.com/">
                     <div class="caption">
                         <div class="caption-content">
-                            <div class="h2">Workspace</div>
+                            <div class="h2">Docker</div>
                             <p class="mb-0">A yellow workspace with some scissors, pencils, and other objects.</p>
                         </div>
                     </div>
-                    <img class="img-fluid" src="{% static 'img/portfolio-4.jpg' %}" alt="">
+                    <img class="img-fluid" src="{% static 'img/4.jpg' %}" alt="">
                 </a>
+            </div>
+            <div class="container text-center">
+                <br>
+                <a class="btn btn-primary btn-xl" href="{% url 'account_login' %}">日記サイトへGO</a>
             </div>
         </div>
     </div>
 </section>
-{% endblock %}
 
-{% block totop %}
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
     <i class="fas fa-angle-up"></i>
