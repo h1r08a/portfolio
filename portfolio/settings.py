@@ -14,9 +14,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG',default=False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
-
-EMAIL_BACKEND = env('EMAIL_BACKEND')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 # 上に記述した順にtemplateを読み込みにいく
 # 最優先はTEMPLATE DIRSの上に記述したパス
@@ -75,7 +73,6 @@ DATABASES = {
     'default': env.db() # DATABASE_URLの環境変数を分解してくれる
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -111,13 +108,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# 静的ファイル置き場
+STATIC_ROOT = env('STATIC_ROOT')                    # 本番環境でのみ利用される
+MEDIA_ROOT = env('MEDIA_ROOT')
+MEDIA_URL = os.path.join(BASE_DIR, 'media/')
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, env('MEDIA_ROOT'))
-STATICFILES_DIRS = (
+STATICFILES_DIRS = (                                # staticファイルの場所
     os.path.join(BASE_DIR, 'static'),
 )
-MEDIA_URL = os.path.join(BASE_DIR, 'media/')
 
 MESSAGE_TAGS = {
     messages.ERROR: 'alert alert-danger',
@@ -153,3 +150,8 @@ ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
 # ログアウトリンクのクリック一発でログアウトする設定
 ACCOUNT_LOGOUT_ON_GET = True
+
+# Amazon SES関連設定
+AWS_SES_ACCESS_KEY_ID = env('AWS_SES_ACCESS_KEY_ID')
+AWS_SES_SECRET_ACCESS_KEY = env('AWS_SES_SECRET_ACCESS_KEY')
+EMAIL_BACKEND = env('EMAIL_BACKEND')
