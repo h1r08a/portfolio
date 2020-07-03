@@ -2,3 +2,5 @@ portfolio.code-workspace
 .vscode
 *.pyc
 media
+.env_dev
+.env
