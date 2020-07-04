@@ -20,11 +20,11 @@ from . import settings
 
 # 各アプリのurls.pyの場所を記述する
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('control/', admin.site.urls),
     path('', include('main_app.urls')),
     path('accounts/', include('allauth.urls')),
 ]
 
-# 開発サーバーでメディア配信できるよう記述
-# staticから返されたurlをurlpatternsに追加
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# 開発環境だけDjangoでメディアファイルを静的配信
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -6,7 +6,7 @@ from django.contrib.messages import constants as messages
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env = environ.Env()
-env.read_env('.env_dev')  # .envと.env_devを切り替える
+env.read_env('.env')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
@@ -14,7 +14,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG',default=False)
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 # 上に記述した順にtemplateを読み込みにいく
 # 最優先はTEMPLATE DIRSの上に記述したパス
@@ -108,11 +108,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = env('STATIC_ROOT')                    # 本番環境でのみ利用される
-MEDIA_ROOT = env('MEDIA_ROOT')
-MEDIA_URL = os.path.join(BASE_DIR, 'media/')
+STATIC_ROOT = env('STATIC_ROOT')                    # collectstaticしたときに静的ファイル(ライブラリなど)を集合させるディレクトリを記述
+MEDIA_ROOT = env('MEDIA_ROOT')                      # media保存先のディレクトリのパス
+MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (                                # staticファイルの場所
+STATICFILES_DIRS = (                                # 指定してSTATIC_ROOTへ送りたいディレクトリを記述
     os.path.join(BASE_DIR, 'static'),
 )
 
