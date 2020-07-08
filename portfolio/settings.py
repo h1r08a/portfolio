@@ -136,12 +136,12 @@ AUTHENTICATION_BACKENDS = (
 # 管理サイト用(ユーザー名認証)
 )
 
-# メールアドレス認証に変更し、ユーザー名は使用しない
+# メールアドレス認証に変更し、ユーザー名登録
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 
-# サインアップにメールアドレス確認必須設定
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# サインアップにメールアドレス確認不要設定
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True
 
 # ログイン/ログアウト後の遷移先を設定
