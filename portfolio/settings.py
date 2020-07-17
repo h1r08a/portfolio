@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -65,12 +66,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db() # DATABASE_URLの環境変数を分解してくれる
+    'default': env.db()     # DATABASE_URLの環境変数を分解してくれる
 }
 
 # Password validation
@@ -104,23 +104,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_ROOT = env('STATIC_ROOT')                    # collectstaticしたときに静的ファイル(ライブラリなど)を集合させるディレクトリを記述
-MEDIA_ROOT = env('MEDIA_ROOT')                      # media保存先のディレクトリのパス
-MEDIA_URL = '/media/'
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (                                # 指定してSTATIC_ROOTへ送りたいディレクトリを記述
-    os.path.join(BASE_DIR, 'static'),
-)
-
 MESSAGE_TAGS = {
-    messages.ERROR: 'alert alert-danger',
-    messages.WARNING: 'alert alert-warning',
-    messages.SUCCESS: 'alert alert-success',
-    messages.INFO: 'alert alert-info',
+    messages.ERROR:     'alert alert-danger',
+    messages.WARNING:   'alert alert-warning',
+    messages.SUCCESS:   'alert alert-success',
+    messages.INFO:      'alert alert-info',
 }
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -139,6 +127,7 @@ AUTHENTICATION_BACKENDS = (
 # メールアドレス認証に変更し、ユーザー名登録
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = True
+EMAIL_BACKEND = env('EMAIL_BACKEND')
 
 # サインアップにメールアドレス確認不要設定
 ACCOUNT_EMAIL_VERIFICATION = 'none'
@@ -151,7 +140,23 @@ ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 # ログアウトリンクのクリック一発でログアウトする設定
 ACCOUNT_LOGOUT_ON_GET = True
 
-# Amazon SES関連設定
-AWS_SES_ACCESS_KEY_ID = env('AWS_SES_ACCESS_KEY_ID')
-AWS_SES_SECRET_ACCESS_KEY = env('AWS_SES_SECRET_ACCESS_KEY')
-EMAIL_BACKEND = env('EMAIL_BACKEND')
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+STATIC_ROOT = env('STATIC_ROOT')                    # collectstaticしたときに静的ファイル(ライブラリなど)を集合させるディレクトリを記述
+MEDIA_ROOT = env('MEDIA_ROOT')                      # media保存先のディレクトリのパス
+STATICFILES_DIRS = (                                # 指定してSTATIC_ROOTへ送りたいディレクトリを記述
+    os.path.join(BASE_DIR, 'static'),
+)
+# STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+# AWS関連
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+
+DEFAULT_FILE_STORAGE = 'portfolio.backends.MediaStorage'            # mediaファイル保存先を指定
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'    # staticファイル保存先を指定 こっちが優先
+AWS_STORAGE_BUCKET_NAME = 'naga-portfolio'                          # S3バケット名
+AWS_LOCATION = 'static'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
